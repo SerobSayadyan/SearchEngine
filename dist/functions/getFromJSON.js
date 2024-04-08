@@ -17,3 +17,20 @@ export function getUsersFromJson() {
         throw error; // Propagate the error
     });
 }
+export function getCarsFromJson() {
+    return fetch("./dataJson/cars.json") // Fetch the JSON file from the server
+        .then(response => {
+        if (!response.ok) {
+            throw new Error(`Failed to fetch cars.json: ${response.statusText}`);
+        }
+        return response.json(); // Parse the response as JSON
+    })
+        .then(data => {
+        // Process the JSON data and return it
+        return data;
+    })
+        .catch(error => {
+        console.error("Error fetching cars.json:", error);
+        throw error; // Propagate the error
+    });
+}

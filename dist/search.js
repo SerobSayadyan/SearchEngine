@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { getUsersFromJson } from "./functions/getFromJSON.js";
-import { stringContains } from "./functions/stringContains.js";
+import { usersThatMatch } from "./functions/matchers.js";
 // (async function searchInUsers(keywordToSearch: string) {
 // 	let users: User[] = await getUsersFromJson();
 // 	let retUsers: PriorityDataType<User>[] = stringContains(
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         function searchInUsers(keywordToSearch) {
             return __awaiter(this, void 0, void 0, function* () {
                 let users = yield getUsersFromJson();
-                let retUsers = stringContains(users, keywordToSearch);
+                let retUsers = usersThatMatch(users, keywordToSearch);
                 // Clear previous search results
                 while (resultsContainer.firstChild) {
                     resultsContainer.removeChild(resultsContainer.firstChild);

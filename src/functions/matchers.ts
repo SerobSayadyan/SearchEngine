@@ -1,7 +1,8 @@
+import { Car, CarType } from "../classes/Car.js";
 import { User } from "../classes/User.js";
 import { PriorityDataType, PriorityList } from "../dataStructure/PriorityList.js";
 
-export function stringContains(users: User[], ...args: string[]): PriorityDataType<User>[] {
+export function usersThatMatch(users: User[], ...args: string[]): PriorityDataType<User>[] {
 	const retUsers: PriorityList<User> = new PriorityList();
 
 	for (const user of users) {
@@ -19,6 +20,24 @@ export function stringContains(users: User[], ...args: string[]): PriorityDataTy
 	return retUsers.getData();
 }
 
+export function carsThatMatch(users: Car[], ...args: string[]): PriorityDataType<Car>[] {
+	const retCars: PriorityList<Car> = new PriorityList();
+
+	for (const car of users) {
+		let carRating: number = 0;
+		for (const arg of args) {
+			carRating += carsRatingCounter(car, arg);
+
+			if (carRating && !retCars.contains(car)) {
+				retCars.insertData(car, carRating);
+				break;
+			}
+		}
+	}
+
+	return retCars.getData();
+}
+
 function userRatingCounter(user: User, searchName: string): number {
 	//counting avarage rating of the user
 	const nameRating = contains(user.firstName, searchName);
@@ -26,7 +45,28 @@ function userRatingCounter(user: User, searchName: string): number {
 	return nameRating + lastNameRating;
 }
 
+function carsRatingCounter(car: Car, searchName: string): number {
+    
+	switch(searchName.toUpperCase()) {
+		case 'SEDAN' : {
+			return car.carType.toString() === 'SEDAN' ? 21 : 0;
+		}
+		case 'SUV' : {
+			return car.carType.toString() === 'SUV' ? 21 : 0;
+		}
+		case 'CROSSOVER' : {
+			return car.carType.toString() === 'CROSSOVER' ? 21 : 0;
+		}
+	}
+
+
+	const nameRating = contains(car.brand, searchName);
+	const lastNameRating = contains(car.model, searchName);
+	return nameRating + lastNameRating;
+}
+
 function contains(str: string, subString: string): number {
+
 	if (str.length === 0 || subString.length === 0) {
 		return 0;
 	}
@@ -71,3 +111,4 @@ function contains(str: string, subString: string): number {
 	}
 	return 0;
 }
+

@@ -1,7 +1,7 @@
 import { User } from "./classes/User.js";
 import { PriorityDataType } from "./dataStructure/PriorityList.js";
 import { getUsersFromJson } from "./functions/getFromJSON.js";
-import { stringContains } from "./functions/stringContains.js";
+import { usersThatMatch } from "./functions/matchers.js";
 
 // (async function searchInUsers(keywordToSearch: string) {
 // 	let users: User[] = await getUsersFromJson();
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		async function searchInUsers(keywordToSearch: string) {
 			let users: User[] = await getUsersFromJson();
-			let retUsers: PriorityDataType<User>[] = stringContains(users, keywordToSearch);
+			let retUsers: PriorityDataType<User>[] = usersThatMatch(users, keywordToSearch);
 			// Clear previous search results
 			while (resultsContainer.firstChild) {
 				resultsContainer.removeChild(resultsContainer.firstChild);

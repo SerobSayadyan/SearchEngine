@@ -1,5 +1,5 @@
 import { PriorityList } from "../dataStructure/PriorityList.js";
-export function stringContains(users, ...args) {
+export function usersThatMatch(users, ...args) {
     const retUsers = new PriorityList();
     for (const user of users) {
         let userRating = 0;
@@ -13,10 +13,40 @@ export function stringContains(users, ...args) {
     }
     return retUsers.getData();
 }
+export function carsThatMatch(users, ...args) {
+    const retCars = new PriorityList();
+    for (const car of users) {
+        let carRating = 0;
+        for (const arg of args) {
+            carRating += carsRatingCounter(car, arg);
+            if (carRating && !retCars.contains(car)) {
+                retCars.insertData(car, carRating);
+                break;
+            }
+        }
+    }
+    return retCars.getData();
+}
 function userRatingCounter(user, searchName) {
     //counting avarage rating of the user
     const nameRating = contains(user.firstName, searchName);
     const lastNameRating = contains(user.lastName, searchName);
+    return nameRating + lastNameRating;
+}
+function carsRatingCounter(car, searchName) {
+    switch (searchName.toUpperCase()) {
+        case 'SEDAN': {
+            return car.carType.toString() === 'SEDAN' ? 21 : 0;
+        }
+        case 'SUV': {
+            return car.carType.toString() === 'SUV' ? 21 : 0;
+        }
+        case 'CROSSOVER': {
+            return car.carType.toString() === 'CROSSOVER' ? 21 : 0;
+        }
+    }
+    const nameRating = contains(car.brand, searchName);
+    const lastNameRating = contains(car.model, searchName);
     return nameRating + lastNameRating;
 }
 function contains(str, subString) {
