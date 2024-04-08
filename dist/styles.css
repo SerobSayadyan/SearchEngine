@@ -74,14 +74,14 @@ table td {
 
 #usersResults{
     display: inline-table flex;
-    /* justify-content: flex-start; */
+    justify-content: flex-start;
     flex-direction: column;
 }
 
 #carsResults{
-    display: inline-table inline-flex
-    /* justify-content: flex-start; */
-    /* flex-direction: column; */
+    display: inline-table inline-flex;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 
 #tableClass{

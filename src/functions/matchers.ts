@@ -34,7 +34,6 @@ export function carsThatMatch(users: Car[], ...args: string[]): PriorityDataType
 			}
 		}
 	}
-
 	return retCars.getData();
 }
 
@@ -46,19 +45,16 @@ function userRatingCounter(user: User, searchName: string): number {
 }
 
 function carsRatingCounter(car: Car, searchName: string): number {
-    
-	switch(searchName.toUpperCase()) {
-		case 'SEDAN' : {
-			return car.carType.toString() === 'SEDAN' ? 21 : 0;
-		}
-		case 'SUV' : {
-			return car.carType.toString() === 'SUV' ? 21 : 0;
-		}
-		case 'CROSSOVER' : {
-			return car.carType.toString() === 'CROSSOVER' ? 21 : 0;
-		}
-	}
+	const searchNameUpperCase = searchName.toUpperCase();
+	const carTypeString = car.carType.toString();
 
+	if (searchNameUpperCase === "SEDAN") {
+		return carTypeString === "SEDAN" ? 22 : 0;
+	} else if (searchNameUpperCase === "SUV") {
+		return carTypeString === "SUV" ? 22 : 0;
+	} else if (searchNameUpperCase === "CROSSOVER") {
+		return carTypeString === "CROSSOVER" ? 22 : 0;
+	}
 
 	const nameRating = contains(car.brand, searchName);
 	const lastNameRating = contains(car.model, searchName);
@@ -66,7 +62,6 @@ function carsRatingCounter(car: Car, searchName: string): number {
 }
 
 function contains(str: string, subString: string): number {
-
 	if (str.length === 0 || subString.length === 0) {
 		return 0;
 	}
@@ -87,6 +82,8 @@ function contains(str: string, subString: string): number {
 		} else {
 			rating++;
 		}
+	} else {
+		rating--;
 	}
 
 	let k: number = 0;
@@ -105,10 +102,17 @@ function contains(str: string, subString: string): number {
 				return rating;
 			}
 			k += 2;
+		// } else if (stringCharArray[i + 1] === subCharArray[k++]) {
+		// 	rating -= deratinger++;
+		// 	if (rating <= 0) {
+		// 		return 0;
+		// 	}
+		// 	if (k >= subCharArray.length) {
+		// 		return rating;
+		// 	}
 		} else {
 			k = 0;
 		}
 	}
 	return 0;
 }
-
