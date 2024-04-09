@@ -9,24 +9,20 @@
     <link rel="stylesheet" href="styles.css">
     <script type="module" src="searchNoTS.js"></script>
 </head>
-
-<body>
-    <div class="container">
-        <label for="inputValue">Enter a value:</label>
-        <input type="text" id="inputValue">
-        <button id="submitButton">Submit</button>
-        <table class="tableClass">
-            <tr class="firstTR">
-                <th>Users</th>
-                <th>Cars</th>
-
-            </tr>
-            <tr class="secondTR">
-                <td class="column" id="usersResults"></td>
-                <td class="column" id="carsResults"></td>
-            </tr>
-        </table>
-    </div>
+    <main>
+      <h1> Enter a value</h1>
+      <input type="text" id="inputValue">
+      <button id="submitButton">Submit</button>
+      <section>
+        <div class="titles">
+            <h2>Users results</h2>
+            <h2>Car results</h2>
+        </div>
+        <div class="results">
+            <div class="resultsWrapper" id="usersResults"></div>
+            <div class="resultsWrapper" id="carsResults"></div>
+        </div>
+      </section>
+    </main>
 </body>
-
 </html>

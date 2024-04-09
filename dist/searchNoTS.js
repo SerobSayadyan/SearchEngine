@@ -4,8 +4,8 @@ import { usersThatMatch, carsThatMatch } from "./functions/matchers.js";
 document.addEventListener("DOMContentLoaded", () => {
 	const inputElement = document.getElementById("inputValue");
 	const submitButton = document.getElementById("submitButton");
-	const usersContainer = document.getElementById("usersResults");
-	const carsContainer = document.getElementById("carsResults");
+	const usersResults = document.getElementById("usersResults");
+	const carsResults = document.getElementById("carsResults");
 
 	if (submitButton) {
 		// Check if submitButton exists
@@ -16,8 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
 				inputElement.value = ""; // Clear the input field
 				
 				// Clear previous search results
-				while (usersContainer.firstChild) {
-					usersContainer.removeChild(usersContainer.firstChild);
+				while (usersResults.firstChild) {
+					usersResults.removeChild(usersResults.firstChild);
+				}
+				while (carsResults.firstChild) {
+					carsResults.removeChild(carsResults.firstChild);
 				}
 
 				// Invoke searchInUsers with the input value
@@ -35,13 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			// Display search results
 			retUsers.forEach((user) => {
 				const userDiv = document.createElement("div");
-				userDiv.textContent = `First Name: ${user.obj.firstName}, Last Name: ${user.obj.lastName}, Age: ${user.obj.age}, Posts: ${user.obj.posts}, Friends: ${user.obj.friends}, Priority: ${user.priority}`;
-				usersContainer.appendChild(userDiv);
+				userDiv.innerHTML = `First Name: <b>${user.obj.firstName}</b>, Last Name: <b>${user.obj.lastName}</b>, Age: <b>${user.obj.age}</b>, Posts: <b>${user.obj.posts}</b>, Friends: <b>${user.obj.friends}</b>, Priority: <b>${user.priority}</b>`;
+				usersResults.appendChild(userDiv);
 			});
-
-			// for (const user of retUsers) {
-			//     console.log(`{firstName: ${user.obj.firstName}, lastName: ${user.obj.lastName}, age: ${user.obj.age}, posts: ${user.obj.posts}, friends: ${user.obj.friends}} priority: ${user.priority}`);
-			// }
 		}
 
 		async function searchInCars(keywordToSearch) {
@@ -51,8 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			// Display search results
 			retCars.forEach((car) => {
 				const carDiv = document.createElement("div");
-				carDiv.textContent = `Brand: ${car.obj.brand}, model: ${car.obj.model}, type: ${car.obj.carType}, maxSpeed: ${car.obj.maxSpeed}, ID: ${car.obj.carI}, Priority: (${car.priority})`;
-				carsContainer.appendChild(carDiv);
+				carDiv.innerHTML = `Brand: <b>${car.obj.brand}</b>, model: <b>${car.obj.model}</b>, type: <b>${car.obj.carType}</b>, maxSpeed: <b>${car.obj.maxSpeed}</b>, ID: <b>${car.obj.carI}</b>, Priority: <b>(${car.priority})</b>`;
+				carsResults.appendChild(carDiv);
 			});
 		}
 	}
